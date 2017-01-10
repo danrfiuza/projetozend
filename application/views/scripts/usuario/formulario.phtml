@@ -1,0 +1,99 @@
+
+    <form action="<?php echo $this->baseUrl("usuario/gravar");?>" method="post" role="form" enctype="multipart/form-data">
+        <fieldset>
+            <div align="center">
+            	<legend><h2 class="page-header">Cadastro de Usuários</h2></legend>
+            </div>
+            <input type="hidden" class="form-control" value="<?php echo $this->row['id_usuario']?>" name="id_usuario" />
+            <div class="form-group">
+               <label>Nome:</label><input class="form-control" type="text" name="nome" value="<?php echo $this->row['nome'];?>" />
+            </div>
+            <div class="form-group">
+               <label>Telefone:</label><input class="tel form-control" type="text" name="telefone" value="<?php echo $this->row['telefone'];?>" />
+            </div>
+            <div class="form-group">
+                <label>UF:</label>
+                <select name="id_uf" id="id_uf" class="form-control">
+                <?php foreach ($this->uf as $uf):?>
+                 <option  value="<?php echo $uf['id_uf'];?>" <?php echo $uf['id_uf'] == $this->row['id_uf']?"selected":"";?> > <?php echo $uf['nome']?></option>
+                <?php endforeach;?>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Município:</label>
+                <div id="div-municipios">
+                <select name="id_municipio" class="form-control">
+                    <?php foreach ($this->municipio as $municipio):?>
+                     <option  value="<?php echo $municipio['id_municipio'];?>" <?php echo $municipio['id_municipio'] == $this->row['id_municipio']?"selected":"";?> > <?php echo $municipio['nome']?></option>
+                    <?php endforeach;?>
+                </select>
+                </div>
+            </div>
+            <div class="form-group" id="email-group">
+               <label>E-mail:</label><input class="form-control" type="text" id="email" name="email" value="<?php echo $this->row['email'];?>" />
+            </div>
+            <div class="form-group">
+               <label>Senha:</label><input class="form-control" type="password" name="senha" value="<?php echo $this->row['senha'];?>" />
+            </div>
+            <div class="form-group">
+                <label>Perfil:</label>
+                <select name="id_perfil" class="form-control">
+                <?php foreach ($this->perfis as $perfil):?>
+                 <option  value="<?php echo $perfil['id_perfil'];?>" <?php echo $perfil['id_perfil'] == $this->row['id_perfil']?"selected":"";?> > <?php echo $perfil['nome']?></option>
+                <?php endforeach;?>
+                </select>
+            </div>
+            <div class="form-group">
+                  <input type='file' onchange="readURL(this);" name="foto"/>
+                  <img id="foto" class="img img-thumbnail" src="#" alt="your image" />            
+            </div>
+            <div id="div-foto">
+               
+            </div>
+    	</fieldset>
+    	<br />
+    	<br />
+    	<div align="center">
+    	<button class="btn btn-success" type="submit">Salvar</button>
+    	</div>
+    </form>
+    
+    
+    <script>
+      $(function(){
+          $("#id_uf").change(function(){
+             $("#div-municipios").load("<?php echo $this->baseUrl("municipio/carregar-municipio/id_uf/");?>"+$("#id_uf").val());
+          });
+          $("#email").change(function(){
+              $.ajax({
+                  url: "<?php echo $this->baseUrl("usuario/verificar-email/email/")?>"+ $(this).val(),
+                  success: function(data){
+                       if(data == "1"){
+                           $("#email-group").addClass("form-group has-error");
+                           $("#mensagem-alert").toggle();
+                           $("#mensagem-alert").text("O já exeiste e-mail cadastrado");
+                       }
+                  }
+                  
+              });
+          });
+
+      });
+     //script para mostrar preview da imagem
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function (e) {
+                  $('#foto')
+                      .attr('src', e.target.result)
+                      .width(200)
+                      .height(200);
+              };
+
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+    </script>
+

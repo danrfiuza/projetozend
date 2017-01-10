@@ -1,0 +1,22 @@
+<?php if(!empty($_SESSION['mensagem'])):?>
+   <div class="alert alert-danger">
+       <strong align="center"><?php echo $_SESSION['mensagem']?></strong>
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+       </button>
+   </div>
+<?php endif;?>
+<div class=" col-lg-4 col-lg-offset-4">
+  <div align="center"><h1 class="page-header">Login</h1></div>
+  <form action="<?php echo $this->baseUrl("usuario/autenticar");?>" method="post">
+    <div class="form-group">
+       <label for="email">E-mail:</label><input type="text" class="form-control" value="<?php echo $this->row['email'] ?>" name="email" />
+    </div>
+    <div class="form-group">
+       <label for="senha">Senha:</label><input type="password" class="form-control" value="<?php echo $this->row['senha'] ?>" name="senha" />
+    </div>
+    <div class="form-group" align="center">
+       <button class="btn btn-success" type="submit"><h5>Entrar &nbsp;<span class="glyphicon glyphicon-log-in"></span></h5></button>
+    </div>
+  </form>
+</div> 

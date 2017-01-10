@@ -1,0 +1,103 @@
+<html>
+	<head>
+	<meta charset="UTF-8">
+   	    <head>
+    	<?php echo $this->headMeta()->setHttpEquiv('Content-Type', 'text/html;charset=utf-8');?>
+   	    <?php echo $this->headScript()->setFile("/assets/js/jquery-2.1.4.js"); ?>
+        <?php echo $this->headScript()->appendFile("/assets/js/jquery.maskMoney.js"); ?>
+        <?php echo $this->headScript()->appendFile("/assets/js/jquery.number.min.js"); ?>
+        <?php echo $this->headScript()->appendFile("/assets/js/jquery.maskedinput.min.js"); ?>
+        <?php echo $this->headScript()->appendFile("/assets/js/mascaras.js"); ?>
+        <?php echo $this->headScript()->appendFile("/assets/js/Chart.min.js"); ?>
+        <?php echo $this->headScript()->appendFile("/assets/bootstrap/js/bootstrap.js"); ?>
+        <?php echo $this->headLink()->setStylesheet("/assets/bootstrap/css/bootstrap.css"); ?>
+        <?php echo $this->headLink()->setStylesheet("/assets/css/css.css"); ?>
+         <meta name="theme-color" content="#8ba8af">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".tel").mask("(99)9999-9999?9");
+                $("#cpf").mask("999.999.999-99");
+                 $(".cep").mask("99999-999");
+                $(".cnpj").mask("99.999.999/9999-99");
+                $(".data").mask("99/99/9999");
+                //formatação de valores monetários
+                $(".monetario").number(true, 2, ',', '.');
+            });
+        </script>
+
+        <!--        Aplicar classe bootstrap na paginação-->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var link = $("#paginacao > *");
+                var links = $(link).wrapAll("<ul class='pagination pagination-lg'></ul>");
+                $(links).wrap("<li></li>");
+                var list = $("#paginacao  li ");
+                var active = list.find("strong");
+
+                $(active).parent("li").addClass("active");
+                $(active).wrap("<a href='#'></a>");
+            });
+        </script>
+    </head>
+    	<body>
+            <div class="col-lg-12">
+                <!-- Fixed navbar -->
+                <nav class=". menu navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                    <a class="navbar-brand" href="../index.php">Compras</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="">
+                        <a href="<?php echo $this->baseUrl("usuario/index")?>" class="" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false">Usuários <span class=""></span></a>
+                    
+                    </li>
+                    <li class="">
+                    <a href="<?php echo $this->baseUrl("perfil/index")?>" class="" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false">Perfis <span class=""></span></a>
+                    
+                    </li>
+                    
+                    <li class="">
+                        <a href="<?php echo $this->baseUrl("usuario/logout")?>" class="" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false">Deslogar <span class="glyphicon glyphicon-log-out"></span></a>
+                    </li> 
+                </ul>
+                </div><!--/.nav-collapse -->
+                </div>
+                </nav>
+            </div>
+            <br/><hr>
+            <div class="container">
+               <div class="alert alert-danger" hidden="true">
+                   <strong align="center" id="mensagem-alert"></strong>
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                   </button>
+               </div>
+                 <?php echo $this->layout()->content;?>
+        	</div>
+         <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="modal-title"></h4>
+              </div>
+              <div class="modal-body" id="modal-body">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+    	</body>
+	<footer>
+	</footer>
+</html>

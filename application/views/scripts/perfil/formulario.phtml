@@ -1,0 +1,27 @@
+<ul id="tabs" class="nav nav-tabs">
+  <li role="presentation"  class="active"><a   data-toggle="tab" href="#perfil-lista-div" id="perfil-lista">Lista</a></li>
+  <li role="presentation"><a   data-toggle="tab" href="#formulario-perfil">Cadastro</a></li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane " id="formulario-perfil">
+         <form action="<?php echo $this->baseUrl("perfil/gravar");?>" method="post">
+             <input type="hidden" value="<?php echo $this->row['id_perfil']?>" name="id_perfil" />
+             <label>Nome:</label><input type="text" name="nome" value="<?php echo $this->row['nome'];?>" />
+             <button type="submit">Salvar</button>
+        </form>
+    </div>
+    
+    <div class="tab-pane " id="perfil-lista-div">
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#tabs').tab();
+        $('#perfil-lista').click(function(){
+         $('#perfil-lista-div').load("<?php echo $this->baseUrl("perfil/index")?>");
+         $('#perfil-lista-div').tab('show');
+        });
+    });
+</script> 

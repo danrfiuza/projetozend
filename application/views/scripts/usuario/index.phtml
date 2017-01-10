@@ -1,0 +1,38 @@
+<h2>Listagem de Usuários<h2>
+    <div cass="col-lg-4">
+        <a class="btn btn-warning"href="<?php echo $this->baseUrl("usuario/formulario")?>">Novo Usuário<span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+    <table class="table">
+    
+    <thead>
+        <th>Ações</th>
+        <th>ID</th>
+        <th>Imagem</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>E-mail</th>
+        <th>Perfil</th>
+    </thead>
+<?php if(sizeof($this->paginator)): ?>
+    <?php foreach($this->paginator as $usuario){ ?>
+    <tbody>
+     <td><a class="btn btn-primary" href="<?php echo $this->baseUrl("usuario/formulario/id_usuario/").$this->escape($usuario->id_usuario)?>">Alterar <span class="glyphicon glyphicon-pencil"></span></a>
+     <a  class="btn btn-danger" href="<?php echo $this->baseUrl("usuario/excluir/id_usuario/").$this->escape($usuario->id_usuario)?>">Excluir <span class="glyphicon glyphicon-remove"></span></a></td>
+        <td><?php echo $this->escape($usuario->id_usuario); ?></td>
+        <td> <img   height="45" width="45" src="<?php echo $this->baseUrl('img/fotos/')?><?php echo $this->escape($usuario->foto); ?>" class="img-responsive img-circle" alt="<?php echo $this->escape($usuario->foto)?>"></td>
+        <td><?php echo $this->escape($usuario->nome); ?></td>
+        <td><?php echo $this->escape($usuario->telefone); ?></td>
+        <td><?php echo $this->escape($usuario->email); ?></td>
+        <td><?php echo $this->escape($usuario->id_perfil); ?></td>
+    </tbody>    
+        <?php } ?>
+    
+    </table>
+<?php else: ?>
+    <li>Nenhum usuário encontrado.</li>
+<?php endif; ?>
+</ul>
+<div align="center" class="paginator">
+ <?php echo $this->paginator; ?>
+</div>
+

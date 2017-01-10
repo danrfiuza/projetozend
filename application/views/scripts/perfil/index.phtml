@@ -1,0 +1,27 @@
+<h2>Listagem do Perfil<h2>
+    
+    <table class="table">
+    
+    <tr>
+    	<td>Ações</td>
+        <td>ID</td>
+        <td>Nome</td>
+        
+        </tr>
+<?php if(sizeof($this->paginator)): ?>
+    <?php foreach($this->paginator as $perfil){ ?>
+    <tr>
+    	<td><a href="<?php echo $this->baseUrl("perfil/formulario/id_perfil/").$this->escape($perfil->id_perfil)?>">Alterar</a>
+    	<a href="<?php echo $this->baseUrl("perfil/excluir/id_perfil/").$this->escape($perfil->id_perfil)?>">Excluir</a></td>
+        <td><?php echo $this->escape($perfil->id_perfil); ?></td>
+        <td><?php echo $this->escape($perfil->nome); ?></td>
+        
+        </tr>    
+        <?php } ?>
+    
+    </table>
+<?php else: ?>
+    <li>Nenhum usuário encontrado.</li>
+<?php endif; ?>
+</ul>
+<?php echo $this->paginator; ?>
